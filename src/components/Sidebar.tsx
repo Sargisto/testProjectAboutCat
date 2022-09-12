@@ -1,37 +1,46 @@
-import React, { Fragment, useEffect, useState } from "react"
+import { Fragment, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import "../styles/sidebar.css";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getCategory,
+  loadCategories,
+} from "../redux/reducers/categoriesReducer";
+import { AppDispatch } from "../redux/store";
+import { ICategoryCat } from "../Models/CategoryModel";
+import { getListCat, loadCatList } from "../redux/reducers/catsListReducer";
 
 export const Sidebar = () => {
+  const categoryData: Array<ICategoryCat> = useSelector(getCategory);
 
-    const [categoryData, setCategoryData] = useState([]);
+  const dispatch = useDispatch<AppDispatch>();
 
-    useEffect(() => {
-        axios.get(`https://api.thecatapi.com/v1/categories`)
-            .then(res => {
-                const newCategories = res.data;
-                setCategoryData(newCategories);
-            })
-    }, [])
+  useEffect(() => {
+    dispatch(loadCategories());
+  }, []);
 
-    return (
-        <Fragment>
-            <div className="sideBarBlock">
-                <ol>
-                    {
-                        categoryData.map((data) => {
-                            return <div key={data[`id`]}>
-                                <li className="category_list">{data[`name`]}</li>
-                            </div>
-                        })
-                    }
-
-                </ol>
-                {/* <Link to='/'>Home</Link> ' '
+  return (
+    <Fragment>
+      <div className="sideBarBlock">
+        <ol>
+          {categoryData.map((data: ICategoryCat) => {
+            return (
+              <div key={data[`id`]}>
+                <li
+                  onClick={() => {
+                    dispatch(loadCatList(0, data[`id`]));
+                  }}
+                  className="category_list"
+                >
+                  {data[`name`]}
+                </li>
+              </div>
+            );
+          })}
+        </ol>
+        {/* <Link to='/'>Home</Link> ' '
                 <Link to='/about'>About</Link> */}
-
-            </div>
-        </Fragment>
-    )
-}
+      </div>
+    </Fragment>
+  );
+};

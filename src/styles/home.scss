@@ -1,0 +1,23 @@
+.main_block_home {
+  .home_title {
+    margin-left: 20px;
+  }
+
+  .catInfoBlock {
+    display: flex;
+    width: 1200px;
+    justify-content: space-around;
+  }
+  .showMore_block {
+    padding: 20px;
+    button {
+      padding: 20px 40px;
+      border: none;
+      cursor: pointer;
+      background-color: #7fff9e;
+      color: cornflowerblue;
+      font-size: 20px;
+      border-radius: 15px;
+    }
+  }
+}
