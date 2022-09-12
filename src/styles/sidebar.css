@@ -1,0 +1,18 @@
+.sideBarBlock {
+    width: 200px;
+    height: 100vh;
+    border: 3px solid slateblue;
+    background: aliceblue;
+}
+
+.category_list {
+    color: grey;
+    padding-top: 40px;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.category_list:hover {
+    opacity: .7 
+}
